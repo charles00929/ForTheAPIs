@@ -1,0 +1,23 @@
+{
+    "name": "BWTV/api-handler",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "BWTV\\ForTheAPIs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Charles W."
+        }
+    ],
+    "require": {},
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BWTV\\ForTheAPIs\\ForTheAPIsProvider"
+            ]
+        }
+    }
+}

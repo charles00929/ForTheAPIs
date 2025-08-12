@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Enums;
+
+use BWTV\ForTheAPIs\Enums\ResponseCode as BaseResponseCode;
+
+/**
+ * ResponseCode
+ *
+ * This class defines the response codes used in the API.
+ * The codes are structured as methods (2 digits) + definitions (4 digits).
+ * The first two digits represent the method, and the last four digits represent the specific response.
+ */
+class ResponseCode extends BaseResponseCode
+{
+    # 商業邏輯可以從 1000~8999
+}
