@@ -2,23 +2,23 @@
 
 namespace BWTV\ForTheAPIs;
 
-use Illuminate\Http\Response;
+use Illuminate\Http\Response as LaravelResponse;
 use BWTV\ForTheAPIs\Enums\ResponseCode;
 use Illuminate\Contracts\Support\Responsable;
 
 class Response implements Responsable
 {
     protected static $templates = [
-        ResponseCode::SUCCESS => ['message_key' => 'api-handler.messages.success', 'status' => Response::HTTP_OK, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::PERMISSION_DENY => ['message_key' => 'api-handler.messages.forbidden', 'status' => Response::HTTP_FORBIDDEN, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::BAD_REQUEST => ['message_key' => 'api-handler.messages.bad_request', 'status' => Response::HTTP_BAD_REQUEST, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::ENTITY_NOT_EXIST => ['message_key' => 'api-handler.messages.not_found', 'status' => Response::HTTP_NOT_FOUND, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::SERVER_ERROR => ['message_key' => 'api-handler.messages.server_error', 'status' => Response::HTTP_INTERNAL_SERVER_ERROR, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::VALIDATION_ERROR => ['message_key' => 'api-handler.messages.validation_fail', 'status' => Response::HTTP_UNPROCESSABLE_ENTITY, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::UNAUTHENTICATED => ['message_key' => 'api-handler.messages.unauthenticated', 'status' => Response::HTTP_UNAUTHORIZED, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::TOO_MANY_REQUEST => ['message_key' => 'api-handler.messages.too_many_requests', 'status' => 429, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::DB_ERROR => ['message_key' => 'api-handler.messages.db_error', 'status' => Response::HTTP_INTERNAL_SERVER_ERROR, 'method' => ResponseCode::METHOD_NONE],
-        ResponseCode::MISSING_FILES => ['message_key' => 'api-handler.messages.file_not_found', 'status' => Response::HTTP_INTERNAL_SERVER_ERROR, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::SUCCESS => ['message_key' => 'for-the-apis.messages.success', 'status' => LaravelResponse::HTTP_OK, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::PERMISSION_DENY => ['message_key' => 'for-the-apis.messages.forbidden', 'status' => LaravelResponse::HTTP_FORBIDDEN, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::BAD_REQUEST => ['message_key' => 'for-the-apis.messages.bad_request', 'status' => LaravelResponse::HTTP_BAD_REQUEST, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::ENTITY_NOT_EXIST => ['message_key' => 'for-the-apis.messages.not_found', 'status' => LaravelResponse::HTTP_NOT_FOUND, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::SERVER_ERROR => ['message_key' => 'for-the-apis.messages.server_error', 'status' => LaravelResponse::HTTP_INTERNAL_SERVER_ERROR, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::VALIDATION_ERROR => ['message_key' => 'for-the-apis.messages.validation_fail', 'status' => LaravelResponse::HTTP_UNPROCESSABLE_ENTITY, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::UNAUTHENTICATED => ['message_key' => 'for-the-apis.messages.unauthenticated', 'status' => LaravelResponse::HTTP_UNAUTHORIZED, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::TOO_MANY_REQUEST => ['message_key' => 'for-the-apis.messages.too_many_requests', 'status' => LaravelResponse::HTTP_TOO_MANY_REQUESTS, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::DB_ERROR => ['message_key' => 'for-the-apis.messages.db_error', 'status' => LaravelResponse::HTTP_INTERNAL_SERVER_ERROR, 'method' => ResponseCode::METHOD_NONE],
+        ResponseCode::MISSING_FILES => ['message_key' => 'for-the-apis.messages.file_not_found', 'status' => LaravelResponse::HTTP_INTERNAL_SERVER_ERROR, 'method' => ResponseCode::METHOD_NONE],
     ];
 
     /**
@@ -39,7 +39,7 @@ class Response implements Responsable
         public string $code = ResponseCode::SERVER_ERROR
     ) {
         $this->data = $data;
-        $this->message = $message ?? config('api-handler.messages.error', 'not implement.');
+        $this->message = $message ?? config('for-the-apis.messages.error', 'not implement.');
         $this->status = $status;
         $this->method = $method;
         $this->code = $code;
@@ -50,8 +50,8 @@ class Response implements Responsable
     protected static function mapping($code)
     {
         return static::$templates[$code] ?? [
-            'message_key' => 'api-handler.messages.general_error',
-            'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            'message_key' => 'for-the-apis.messages.general_error',
+            'status' => LaravelResponse::HTTP_INTERNAL_SERVER_ERROR,
             'method' => ResponseCode::METHOD_NONE,
         ];
     }

@@ -1,5 +1,7 @@
 <?php
 
+namespace BWTV\ForTheAPIs\Tests\Feature;
+
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -9,7 +11,7 @@ use BWTV\ForTheAPIs\Enums\ResponseCode;
 use Illuminate\Testing\Fluent\AssertableJson;
 use BWTV\ForTheAPIs\Tests\Utilities\RuntimeSetup;
 use BWTV\ForTheAPIs\Tests\Utilities\ResponseFormat;
-use BWTV\ForTheAPIs\Exceptions\ResponseException;
+use BWTV\ForTheAPIs\Exceptions\ForTheAPIsException;
 
 class ExceptionThrowsAndCatchesTest extends TestCase
 {
@@ -38,15 +40,14 @@ class ExceptionThrowsAndCatchesTest extends TestCase
     public function it_can_render_the_exception_with_defined_code()
     {
         /** arrange */
-        config()->set('api-handler.exception_responses.9966', [
+        config()->set('for-the-apis.exception_responses.9966', [
             'message' => 'Unit Test',
             'status' => 400,
             'method' => ResponseCode::METHOD_TOAST,
         ]);
         $controller = $this->createController();
         $controller->newMethod('businessLogic', function () use ($controller) {
-            throw new ResponseException('9966');
-                
+            throw new ForTheAPIsException('9966');
         });
         Route::get('handler/custom-exception-test', fn() => $controller->businessLogic())
             ->middleware('fta.api');
@@ -93,7 +94,8 @@ class ExceptionThrowsAndCatchesTest extends TestCase
     }
 
     #[Test]
-    public function it_can_catch_on_form_validation_fail(){
+    public function it_can_catch_on_form_validation_fail()
+    {
         /** arrange */
         $controller = $this->createController();
         $controller->newMethod('businessLogic', function () use ($controller) {
@@ -125,7 +127,7 @@ class ExceptionThrowsAndCatchesTest extends TestCase
             'driver' => 'token',
             'provider' => 'users',
         ]);
-        
+
         $controller = $this->createController();
         $controller->newMethod('businessLogic', function () {
             return Response::with(ResponseCode::SUCCESS, ['authenticated' => true]);
@@ -148,7 +150,8 @@ class ExceptionThrowsAndCatchesTest extends TestCase
     }
 
     #[Test]
-    public function it_can_catch_on_query_error(){
+    public function it_can_catch_on_query_error()
+    {
         /** arrange */
         $controller = $this->createController();
         $controller->newMethod('businessLogic', function () use ($controller) {

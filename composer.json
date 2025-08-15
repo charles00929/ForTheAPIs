@@ -1,5 +1,5 @@
 {
-    "name": "BWTV/api-handler",
+    "name": "bwtv/fortheapis",
     "type": "library",
     "autoload": {
         "psr-4": {

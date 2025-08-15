@@ -38,7 +38,7 @@ class ForTheAPIsProvider extends ServiceProvider
         /**
          * A middleware that scoped-bind an ExceptionHandler on the specific routes
          */
-        $alias = config('for-the-apis.middleware_alias', 'fta');
+        $alias = config('for-the-apis.middleware_alias', 'fta.api');
         $this->app->get('router')->aliasMiddleware($alias, APIHandling::class);
     }
 }

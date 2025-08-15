@@ -1,5 +1,7 @@
 <?php
 
+namespace BWTV\ForTheAPIs\Tests\Feature;
+
 use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +32,7 @@ class LagacyTest extends TestCase
 
         /** act */
         $response = $this->get('handler/tests');
-        
+
         /** assert */
         $this->assertResponseFormat($response);
         $response->assertStatus(200);

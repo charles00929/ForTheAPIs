@@ -411,7 +411,7 @@ Fallback 機制僅處理以 `api` 前綴開頭的路由（可在配置中修改�
 
 ## 配置
 
-### 配置文件 `config/api-handler.php`
+### 配置文件 `config/for-the-apis.php`
 請使用 `php artisan vendor:publish --provider="BWTV\ForTheAPIs\ForTheAPIsProvider" --tag="config"` 將設定檔放置到專案內
 
 ```php
@@ -451,7 +451,7 @@ return [
 
     /**
      * 自定義異常回應配置
-     * 當拋出 ResponseException 時使用
+     * 當拋出 ForTheAPIsException 時使用
      * 建議使用 ResponseCode 類的常數作為鍵值
      */
     'exception_responses' => [
@@ -707,7 +707,7 @@ public function store(Request $request)
 A: 確保路由使用了 `fta.api` middleware。
 
 ### Q: 如何自定義預設訊息？
-A: 發布配置文件後，在 `config/api-handler.php` 中修改 `messages` 陣列。
+A: 發布配置文件後，在 `config/for-the-apis.php` 中修改 `messages` 陣列。
 
 ### Q: 如何處理自定義異常？
 A: 在異常類中實現 `render()` 方法，返回 `Response` 實例。
@@ -716,7 +716,7 @@ A: 在異常類中實現 `render()` 方法，返回 `Response` 實例。
 A: 為了保持 JSON Response中 `data` 欄位始終為對象類型，提高前端處理一致性。
 
 ### Q: 如何自定義業務邏輯異常？
-A: 可以在 `config/api-handler.php` 中配置自定義異常回應：
+A: 可以在 `config/for-the-apis.php` 中配置自定義異常回應：
 ```php
 'exception_responses' => [
     '9966' => [
@@ -728,5 +728,5 @@ A: 可以在 `config/api-handler.php` 中配置自定義異常回應：
 ```
 然後在業務邏輯中拋出：
 ```php
-throw new ResponseException('9966');
+throw new ForTheAPIsException('9966');
 ```

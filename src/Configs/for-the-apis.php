@@ -5,6 +5,7 @@ use BWTV\ForTheAPIs\Enums\ResponseCode;
 return [
     /**
      * default messages for each response.
+     * TODO: i18n supports, this would be moved to the language files.
      */
     'messages' => [
         'success' => 'Success.',
@@ -47,5 +48,21 @@ return [
             'method' => ResponseCode::METHOD_NONE,
         ],
         
+    ],
+
+    /**
+     * TODO: wait for the next version
+     * to list the objects that should be casted to the format.
+     */
+    'casting' => [
+        // Laravel's objects => formatted array/object
+    ],
+
+    /**
+     * TODO: wait for the next version
+     * to define the fields of the response by the developer (It's you).
+     */
+    'response_format' => [
+
     ],
 ];

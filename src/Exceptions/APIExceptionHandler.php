@@ -14,7 +14,7 @@ class APIExceptionHandler extends Handler
 {
     public function register()
     {
-        $this->renderable(function (ResponseException $e, $request) {
+        $this->renderable(function (ForTheAPIsException $e, $request) {
             return $e->render();
         })->renderable(function (\Illuminate\Validation\ValidationException $e, $request) {
             $response = Response::with(ResponseCode::VALIDATION_ERROR);
